@@ -6,3 +6,6 @@ from .models import Blog
 def home(request):
     blogs = Blog.objects.all().order_by('-created')[:5]
     return render(request, 'blog_app/home.html', {'blogs':blogs})
+
+def login_user(request):
+    return render(request, 'blog_app/login_page.html')

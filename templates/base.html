@@ -6,6 +6,7 @@
     <title>{% block title %}My Blog{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles2.css' %}" />
   </head>
   <body>
     <!-- 🌐 Navbar -->
@@ -28,7 +29,7 @@
           <a href="">Logout</a>
           <span>Hi, {{ user.username }}</span>
           {% else %}
-          <a href="">Login</a>
+          <a href="{% url 'login-page' %}">Login</a>
           <a href="">Signup</a>
           {% endif %}
         </div>
