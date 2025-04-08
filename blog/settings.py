@@ -54,7 +54,8 @@ MIDDLEWARE = [
 ]
 
 ALLOWED_HOSTS = [
-    'blogs-django.onrender.com'
+    'blogs-django.onrender.com',
+    'blogs.sulavg.com.np',
 ]
 
 ROOT_URLCONF = 'blog.urls'
