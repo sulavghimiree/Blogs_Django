@@ -1,0 +1,489 @@
+/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: #222;
+  }
+  
+  a {
+    color: #3b82f6;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  a:hover {
+    color: #2563eb;
+    text-decoration: underline;
+  }
+  
+  /* Layout */
+  main {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  /* Header & Navigation */
+  header {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .nav-left a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #222;
+  }
+  
+  .nav-center {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .nav-center a {
+    color: #555;
+    font-weight: 500;
+    position: relative;
+  }
+  
+  .nav-center a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #3b82f6;
+    transition: width 0.3s ease;
+  }
+  
+  .nav-center a:hover::after {
+    width: 100%;
+  }
+  
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .nav-right form {
+    display: flex;
+    position: relative;
+  }
+  
+  .nav-right input {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    width: 200px;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-right input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    width: 240px;
+  }
+  
+  .nav-right button {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+  }
+  
+  .nav-right button:hover {
+    background-color: #2563eb;
+  }
+  
+  .nav-right span {
+    font-weight: 500;
+    color: #555;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #fff;
+    border-top: 1px solid #eee;
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  
+  .social-icons a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #555;
+    transition: color 0.2s ease;
+  }
+  
+  .social-icons a:hover {
+    color: #3b82f6;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 900px) {
+    nav {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    
+    .nav-center {
+      order: 3;
+      width: 100%;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+    
+    .nav-right {
+      order: 2;
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .nav-right form {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+    
+    .nav-right input {
+      width: 100%;
+    }
+    
+    .nav-left {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .nav-right form {
+      flex-direction: column;
+    }
+    
+    .nav-right button {
+      margin: 0.5rem 0 0 0;
+      width: 100%;
+    }
+    
+    .nav-center {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    main {
+      padding: 1rem;
+    }
+  }
+  
+  /* Blog Post Styling */
+  .post {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .post-title {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #777;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .post-content {
+    margin-top: 1rem;
+  }
+  
+  .post-content p {
+    margin-bottom: 1rem;
+  }
+  
+  /* Form Styling */
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.2s ease;
+  }
+  
+  .form-control:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-primary {
+    background-color: #3b82f6;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #2563eb;
+  }
+  
+  /* Utils */
+  .mt-4 {
+    margin-top: 1rem;
+  }
+
+  /* Home Page Specific Styling */
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #4f46e5, #3b82f6);
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 3rem;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.9;
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: white;
+  color: #3b82f6;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.cta-button:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+}
+
+/* Latest Posts Section */
+.latest-posts {
+  background-color: white;
+  border-radius: 8px;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.latest-posts h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.latest-posts h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: #3b82f6;
+}
+
+.latest-posts ul {
+  list-style: none;
+  padding: 0;
+}
+
+.latest-posts li {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.latest-posts li:last-child {
+  border-bottom: none;
+}
+
+.latest-posts li a {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 0.5rem;
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.latest-posts li a:hover {
+  color: #3b82f6;
+}
+
+.latest-posts li p {
+  color: #555;
+  line-height: 1.5;
+  margin-top: 0.5rem;
+}
+
+/* About Section */
+.about {
+  background-color: white;
+  border-radius: 8px;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.about h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.about h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: #3b82f6;
+}
+
+.about p {
+  margin-bottom: 2rem;
+  color: #444;
+  line-height: 1.7;
+}
+
+.about .cta-button {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.about .cta-button:hover {
+  background-color: #2563eb;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero {
+    padding: 3rem 1.5rem;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero p {
+    font-size: 1.1rem;
+  }
+  
+  .latest-posts, .about {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  
+  .hero p {
+    font-size: 1rem;
+  }
+  
+  .latest-posts li a {
+    font-size: 1.2rem;
+  }
+}

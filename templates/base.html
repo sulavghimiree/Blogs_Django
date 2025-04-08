@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}My Blog{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+  </head>
+  <body>
+    <!-- 🌐 Navbar -->
+    <header>
+      <nav>
+        <div class="nav-left">
+          <a href="">MyBlog</a>
+        </div>
+        <div class="nav-center">
+          <a href="">Home</a>
+          <a href="">Blog</a>
+          <a href="">About</a>
+        </div>
+        <div class="nav-right">
+          <form method="GET" action="">
+            <input type="text" name="q" placeholder="Search..." />
+            <button type="submit">Search</button>
+          </form>
+          {% if user.is_authenticated %}
+          <a href="">Logout</a>
+          <span>Hi, {{ user.username }}</span>
+          {% else %}
+          <a href="">Login</a>
+          <a href="">Signup</a>
+          {% endif %}
+        </div>
+      </nav>
+    </header>
+
+    <!-- 📄 Main Content -->
+    <main>{% block content %} {% endblock %}</main>
+
+    <!-- 👣 Footer -->
+    <footer>
+      <p>&copy; {{ year|default:"2025" }} MyBlog. All rights reserved.</p>
+      <div class="social-icons">
+        <a href="https://twitter.com" target="_blank" rel="noopener">
+          <i class="fa fa-twitter"></i> Twitter
+        </a>
+        <a href="https://t.me" target="_blank" rel="noopener">
+          <i class="fa fa-telegram"></i> Telegram
+        </a>
+      </div>
+    </footer>
+  </body>
+</html>
