@@ -50,6 +50,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+ALLOWED_HOSTS = [
+    'blogs-django.onrender.com'
+]
+
 ROOT_URLCONF = 'blog.urls'
 
 TEMPLATES = [
