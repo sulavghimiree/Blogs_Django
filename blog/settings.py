@@ -54,6 +54,7 @@ MIDDLEWARE = [
 ]
 
 ALLOWED_HOSTS = [
+    '127.0.0.1',
     'blogs-django.onrender.com',
     'blogs.sulavg.com.np',
 ]
