@@ -3,6 +3,7 @@ from .models import Blog
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from .forms import CustomUserCreationForm
 
 # Create your views here.
 
@@ -34,7 +35,7 @@ def signup_user(request):
     if request.user.is_authenticated:
         return redirect('home')
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
 
         if form.is_valid():
             form.save()
