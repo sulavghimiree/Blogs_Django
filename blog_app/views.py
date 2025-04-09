@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_list_or_404
 from .models import Blog
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
 # Create your views here.
@@ -30,4 +31,15 @@ def logout_user(request):
     return redirect('home')
 
 def signup_user(request):
-    return render(request, 'blog_app/signup_page.html')
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Account Created Successfully')
+            return redirect('login-page')
+        else:
+            messages.error(request, 'Please correct the errors')
+    else:
+        form = UserCreationForm()
+    return render(request, 'blog_app/signup_page.html', {'form':form})
