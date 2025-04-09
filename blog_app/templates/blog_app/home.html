@@ -14,7 +14,7 @@
       <p>{{ blog.short_desc }}</p>
       <small>By {{blog.author}}</small>
       {% if request.user == blog.author %}
-      <a href="{% url 'delete-blog' blog.id %}">Delete</a>
+      <a style="color: red" href="{% url 'delete-blog' blog.id %}">Delete</a>
       {% endif %}
     </li>
     {% empty %}
