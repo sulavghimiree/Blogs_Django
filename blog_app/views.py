@@ -62,3 +62,12 @@ def create_blog(request):
 def blog_detail(request, pk):
     blog = get_object_or_404(Blog, pk=pk, is_published=True)
     return render(request, 'blog_app/blog_detail.html', {"blog":blog})
+
+@login_required(login_url='login-page')
+def delete_blog(request, pk):
+    blog = get_object_or_404(Blog, pk=pk, author=request.user)
+
+    if request.method == "POST":
+        blog.delete()
+        return redirect('home')
+    return render(request, 'blog_app/delete_blog.html', {'blog':blog})

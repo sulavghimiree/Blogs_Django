@@ -13,6 +13,9 @@
       <a href="{% url 'blog-detail' blog.id %}">{{ blog.title }}</a>
       <p>{{ blog.short_desc }}</p>
       <small>By {{blog.author}}</small>
+      {% if request.user == blog.author %}
+      <a href="{% url 'delete-blog' blog.id %}">Delete</a>
+      {% endif %}
     </li>
     {% empty %}
     <li>No posts available yet. Stay tuned!</li>

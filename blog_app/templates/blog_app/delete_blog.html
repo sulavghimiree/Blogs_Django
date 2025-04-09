@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  .delete-container {
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #fff3f3;
+    border: 1px solid #f5c2c2;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+
+  .delete-container h2 {
+    color: #b30000;
+    margin-bottom: 20px;
+  }
+
+  .delete-container p {
+    color: #444;
+    font-size: 16px;
+    margin-bottom: 25px;
+  }
+
+  .delete-container form button {
+    padding: 10px 25px;
+    margin: 0 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-cancel {
+    background-color: #ccc;
+    color: #000;
+  }
+
+  .btn-delete {
+    background-color: #d11a2a;
+    color: white;
+  }
+
+  .btn-delete:hover {
+    background-color: #a4001c;
+  }
+
+  .btn-cancel:hover {
+    background-color: #999;
+  }
+</style>
+
+<div class="delete-container">
+  <h2>Delete Blog</h2>
+  <p>Are you sure you want to delete "<strong>{{ blog.title }}</strong>"?</p>
+
+  <form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn-delete">Yes, Delete</button>
+    <a href="{% url 'delete-blog' blog.id %}"
+      ><button type="button" class="btn-cancel">Cancel</button></a
+    >
+  </form>
+</div>
+{% endblock %}
