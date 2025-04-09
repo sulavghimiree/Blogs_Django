@@ -7,6 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'styles.css' %}" />
     <link rel="stylesheet" href="{% static 'styles2.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles3.css' %}" />
+    <style>
+      .messages {
+        list-style: none;
+        padding: 0;
+      }
+      .messages .error {
+        color: red;
+        background-color: #ffe6e6;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid red;
+        border-radius: 5px;
+      }
+      .messages .success {
+        color: green;
+        background-color: #e6ffe6;
+      }
+    </style>
   </head>
   <body>
     <!-- 🌐 Navbar -->
@@ -26,11 +45,11 @@
             <button type="submit">Search</button>
           </form>
           {% if user.is_authenticated %}
-          <a href="">Logout</a>
+          <a href="{% url 'logout-user' %}">Logout</a>
           <span>Hi, {{ user.username }}</span>
           {% else %}
           <a href="{% url 'login-page' %}">Login</a>
-          <a href="">Signup</a>
+          <a href="{% url 'signup-page' %}">Signup</a>
           {% endif %}
         </div>
       </nav>
@@ -38,7 +57,6 @@
 
     <!-- 📄 Main Content -->
     <main>{% block content %} {% endblock %}</main>
-
     <!-- 👣 Footer -->
     <footer>
       <p>&copy; {{ year|default:"2025" }} MyBlog. All rights reserved.</p>

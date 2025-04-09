@@ -1,7 +1,7 @@
 {% extends 'base.html' %}{% block content %}
 <section class="login-section">
   <h1>Login to Your Account</h1>
-  <form method="POST">
+  <form action="" method="POST">
     {% csrf_token %}
     <div class="form-group">
       <label for="username">Username:</label>
@@ -15,7 +15,9 @@
       <button type="submit">Login</button>
     </div>
   </form>
-  <p>Don't have an account? <a href="">Sign up here</a></p>
+  <p>
+    Don't have an account? <a href="{% url 'signup-page' %}">Sign up here</a>
+  </p>
   {% if form.errors %}
   <div class="error-message">
     <ul>
@@ -24,6 +26,14 @@
       {% endfor %} {% endfor %}
     </ul>
   </div>
+  {% endif %} {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li class="{% if message.tags %}{{ message.tags }}{% endif %}">
+      {{ message }}
+    </li>
+    {% endfor %}
+  </ul>
   {% endif %}
 </section>
 {% endblock %}
