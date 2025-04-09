@@ -38,8 +38,6 @@ def signup_user(request):
             form.save()
             messages.success(request, 'Account Created Successfully')
             return redirect('login-page')
-        else:
-            messages.error(request, 'Please correct the errors')
     else:
         form = UserCreationForm()
     return render(request, 'blog_app/signup_page.html', {'form':form})
