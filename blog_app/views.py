@@ -71,3 +71,7 @@ def delete_blog(request, pk):
         blog.delete()
         return redirect('home')
     return render(request, 'blog_app/delete_blog.html', {'blog':blog})
+
+def blog_list(request):
+    blogs = Blog.objects.filter(is_published=True).order_by('-created')
+    return render(request, 'blog_app/blog_list.html', {'blogs':blogs})

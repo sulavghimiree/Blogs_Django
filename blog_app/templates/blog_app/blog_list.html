@@ -1,0 +1,108 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  .blog-list-container {
+    max-width: 800px;
+    margin: 40px auto;
+    font-family: Arial, sans-serif;
+  }
+
+  .blog-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fefefe;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .blog-card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .blog-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .blog-meta {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 15px;
+  }
+
+  .blog-short {
+    font-size: 15px;
+    color: #444;
+  }
+
+  .blog-full-content {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: #222;
+  }
+
+  .more-btn {
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .more-btn:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<div class="blog-list-container">
+  <h1>All Blogs</h1>
+
+  {% for blog in blogs %}
+  <div class="blog-card">
+    <div class="blog-title">
+      <a href="{% url 'blog-detail' blog.id %}">{{ blog.title }}</a>
+    </div>
+    <div class="blog-meta">
+      Author: {{ blog.author.username }} | Created on: {{ blog.created|date }}
+    </div>
+    <div class="blog-short">{{ blog.short_desc }}</div>
+
+    <div class="blog-full-content" id="content-{{ blog.id }}">
+      <p>{{ blog.content|linebreaks }}</p>
+    </div>
+
+    <button
+      class="more-btn"
+      onclick="toggleContent('{{ blog.id }}')"
+      id="btn-{{ blog.id }}"
+    >
+      More
+    </button>
+    <a style="color: red" href="{% url 'delete-blog' blog.id %}">Delete</a>
+  </div>
+  {% empty %}
+  <p>No blogs found.</p>
+  {% endfor %}
+</div>
+
+<script>
+  function toggleContent(id) {
+    const content = document.getElementById("content-" + id);
+    const btn = document.getElementById("btn-" + id);
+
+    if (content.style.display === "block") {
+      content.style.display = "none";
+      btn.innerText = "More";
+    } else {
+      content.style.display = "block";
+      btn.innerText = "Less";
+    }
+  }
+</script>
+{% endblock %}
