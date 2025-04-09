@@ -8,7 +8,7 @@ from .forms import CustomUserCreationForm
 # Create your views here.
 
 def home(request):
-    blogs = Blog.objects.all().order_by('-created')[:5]
+    blogs = Blog.objects.filter(is_published=True).order_by('-created')[:5]
     return render(request, 'blog_app/home.html', {'blogs':blogs})
 
 def login_user(request):
