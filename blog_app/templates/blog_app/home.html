@@ -10,7 +10,7 @@
   <ul>
     {% for blog in blogs %}
     <li>
-      <a href="">{{ blog.title }}</a>
+      <a href="{% url 'blog-detail' blog.id %}">{{ blog.title }}</a>
       <p>{{ blog.short_desc }}</p>
       <small>By {{blog.author}}</small>
     </li>
@@ -27,6 +27,6 @@
     so that people can express their thoughts, experiences, and ideas on various
     topics, including technology, life, and more!
   </p>
-  <a href="" class="cta-button">Learn More About Me</a>
+  <a href="https://sulavg.com.np" class="cta-button">Learn More About Me</a>
 </section>
 {% endblock %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_list_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Blog
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
@@ -58,3 +58,7 @@ def create_blog(request):
     else:
             form = BlogForm()
     return render(request, 'blog_app/create_blog.html', {'form':form})
+
+def blog_detail(request, pk):
+    blog = get_object_or_404(Blog, pk=pk, is_published=True)
+    return render(request, 'blog_app/blog_detail.html', {"blog":blog})
