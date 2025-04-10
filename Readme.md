@@ -32,7 +32,7 @@ To run this project locally:
 
 1. **Clone the repository**  
    git clone https://github.com/sulavghimiree/Blogs_Django  
-   cd blog-app
+   cd Blogs_Django
 
 2. **Create a virtual environment**  
    python -m venv venv
