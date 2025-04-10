@@ -30,24 +30,24 @@ Welcome to my personal **Blog App** — a dynamic and fully functional blogging 
 
 To run this project locally:
 
-1. **Clone the repository**
+1. **Clone the repository**  
    git clone https://github.com/sulavghimire/blog-app.git
    cd blog-app
 
-2. **Create a virtual environment**
+2. **Create a virtual environment**  
    python -m venv venv
    source venv/bin/activate # On Windows: venv\Scripts\activate
 
-3. **Install the dependencies**
+3. **Install the dependencies**  
    pip install -r requirements.txt
 
-4. **Apply migrations**
+4. **Apply migrations**  
    python manage.py migrate
 
-5. **Create a superuser (for admin access)**
+5. **Create a superuser (for admin access)**  
    python manage.py createsuperuser
 
-6. **Run the development server**
+6. **Run the development server**  
    python manage.py runserver
 
 7. **Visit http://127.0.0.1:8000 to see the app in action!**
