@@ -119,6 +119,7 @@
   </div>
   <div class="blog-detail-short-desc">{{ blog.short_desc }}</div>
   <div class="blog-detail-content">{{ blog.content|linebreaks }}</div>
+  {% if user.is_authenticated %}
   <div class="like-box">
     <form method="post">
       {% csrf_token %} {% if user_has_liked %}
@@ -164,6 +165,7 @@
       </ul>
     </div>
   </div>
+  {% endif %}
 </div>
 
 <div>
