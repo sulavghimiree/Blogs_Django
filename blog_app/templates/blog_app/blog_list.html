@@ -69,7 +69,11 @@
       <a href="{% url 'blog-detail' blog.id %}">{{ blog.title }}</a>
     </div>
     <div class="blog-meta">
-      Author: {{ blog.author.username }} | Created on: {{ blog.created|date }}
+      Author:
+      <a href="{% url 'user-profile' blog.author.username %}"
+        >{{ blog.author.username }}</a
+      >
+      | Created on: {{ blog.created|date }}
     </div>
     <div class="blog-short">{{ blog.short_desc }}</div>
 
@@ -84,7 +88,9 @@
     >
       More
     </button>
+    {% if blog.author == request.user %}
     <a style="color: red" href="{% url 'delete-blog' blog.id %}">Delete</a>
+    {% endif %}
   </div>
   {% empty %}
   <p>No blogs found.</p>

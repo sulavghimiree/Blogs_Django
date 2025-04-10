@@ -12,9 +12,19 @@
     <li>
       <a href="{% url 'blog-detail' blog.id %}">{{ blog.title }}</a>
       <p>{{ blog.short_desc }}</p>
-      <small>By {{blog.author}}</small>
+      <small>
+        <a
+          style="font-size: 15px; color: blue; margin-top: 5px"
+          href="{% url 'user-profile' blog.author.username %}"
+          >By {{blog.author}}</a
+        ></small
+      >
       {% if request.user == blog.author %}
-      <a style="color: red" href="{% url 'delete-blog' blog.id %}">Delete</a>
+      <a
+        style="color: red; font-size: 18px"
+        href="{% url 'delete-blog' blog.id %}"
+        >Delete</a
+      >
       {% endif %}
     </li>
     {% empty %}

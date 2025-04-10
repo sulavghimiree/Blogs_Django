@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.models import User
 from .models import Blog
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
@@ -75,3 +76,29 @@ def delete_blog(request, pk):
 def blog_list(request):
     blogs = Blog.objects.filter(is_published=True).order_by('-created')
     return render(request, 'blog_app/blog_list.html', {'blogs':blogs})
+
+def about_view(request):
+    return render(request, 'blog_app/about_page.html')
+
+@login_required(login_url='login-page')
+def user_profile(request, username):
+    if username:
+        try:
+            profile_user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return messages.error(request, 'User not found')
+    else:
+        profile_user = request.user
+
+    is_own_profile = (profile_user == request.user)
+    print(profile_user)
+
+    published = profile_user.blog_set.filter(is_published=True).order_by('-created')
+    unpublished = profile_user.blog_set.filter(is_published=False).order_by('-created') if is_own_profile else None
+
+    return render(request, 'blog_app/user_profile.html', {
+        'profile_user':profile_user,
+        'published_blogs':published,
+        'unpublished_blogs':unpublished,
+        'is_own_profile': is_own_profile
+    })

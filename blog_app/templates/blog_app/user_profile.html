@@ -1,0 +1,106 @@
+{% extends 'base.html' %}{% block content %}
+<style>
+  .profile-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+
+  .profile-header {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #222;
+  }
+
+  .user-info {
+    margin-bottom: 40px;
+    font-size: 16px;
+    color: #444;
+  }
+
+  .section-title {
+    font-size: 22px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+  }
+
+  .blog-item {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 5px solid #007bff;
+  }
+
+  .blog-title {
+    font-weight: bold;
+    font-size: 17px;
+    color: #000;
+  }
+
+  .blog-date {
+    font-size: 13px;
+    color: #777;
+  }
+
+  .edit-link {
+    font-size: 13px;
+    margin-top: 5px;
+    display: inline-block;
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .edit-link:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<div class="profile-container">
+  <div class="profile-header">
+    {% if is_own_profile %} Welcome, {{ profile_user.username }}! {% else %}
+    Profile of {{ profile_user.username }} {% endif %}
+  </div>
+
+  <div class="user-info">
+    <strong>Email:</strong> {{ profile_user.email }}<br />
+    <strong>Joined:</strong> {{ profile_user.date_joined|date:"F j, Y" }}
+  </div>
+
+  <div class="section-title">✅ Published Blogs</div>
+  {% for blog in published_blogs %}
+  <div class="blog-item">
+    <div class="blog-title">
+      <a href="{% url 'blog-detail' blog.id %}">{{ blog.title }}</a>
+    </div>
+    <div class="blog-date">
+      Created: {{ blog.created|date:"F j, Y, g:i a" }}
+    </div>
+    {% if is_own_profile %}
+    <a class="edit-link" href="">Edit</a>
+    {% endif %}
+  </div>
+  {% empty %}
+  <p>No published blogs yet.</p>
+  {% endfor %} {% if is_own_profile %}
+  <div class="section-title">🚧 Unpublished Blogs</div>
+  {% for blog in unpublished_blogs %}
+  <div class="blog-item" style="border-left-color: #ff9800">
+    <div class="blog-title">{{ blog.title }}</div>
+    <div class="blog-date">
+      Created: {{ blog.created|date:"F j, Y, g:i a" }}
+    </div>
+    <a class="edit-link" href="">Edit</a>
+  </div>
+  {% empty %}
+  <p>No drafts available.</p>
+  {% endfor %} {% endif %}
+</div>
+{% endblock %}

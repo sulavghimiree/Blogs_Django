@@ -1,0 +1,63 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  .about-container {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 30px;
+    font-family: "Arial", sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  .about-header {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .about-section {
+    font-size: 16px;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 25px;
+  }
+
+  .about-highlight {
+    color: #007bff;
+    font-weight: bold;
+  }
+</style>
+
+<div class="about-container">
+  <div class="about-header">About MyBlog</div>
+
+  <div class="about-section">
+    Welcome to <span class="about-highlight">Our Awesome Blog</span> – a
+    platform for sharing knowledge, stories, and insights on tech, coding, and
+    the digital world. This blog was built using Django as part of a student
+    project, and it's designed with simplicity, functionality, and growth in
+    mind.
+  </div>
+
+  <div class="about-section">
+    Whether you're here to read about web development, machine learning, or
+    general programming tips, our blog aims to provide informative and valuable
+    content for learners and professionals alike.
+  </div>
+
+  <div class="about-section">
+    Created with ❤️ by <span class="about-highlight">Sulav Ghimire</span> an
+    aspiring developer from
+    <span class="about-highlight">Pokhara University</span>, this blog also
+    serves as a demo for Django REST API, authentication, CRUD operations, and
+    template rendering using inbuilt CSS.
+  </div>
+
+  <div class="about-section">
+    Thank you for visiting. Stay tuned, explore our posts, and feel free to
+    share your feedback!
+  </div>
+</div>
+{% endblock %}

@@ -39,7 +39,11 @@
 <div class="blog-detail-container">
   <div class="blog-detail-title">{{ blog.title }}</div>
   <div class="blog-detail-meta">
-    By {{ blog.author.username }} • {{ blog.created|date:"F j, Y" }}
+    By
+    <a href="{% url 'user-profile' blog.author.username %}"
+      >{{ blog.author.username }}</a
+    >
+    • {{blog.created}}
   </div>
   <div class="blog-detail-short-desc">{{ blog.short_desc }}</div>
   <div class="blog-detail-content">{{ blog.content|linebreaks }}</div>

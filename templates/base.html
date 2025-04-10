@@ -37,7 +37,7 @@
         <div class="nav-center">
           <a href="{% url 'home' %}">Home</a>
           <a href="{% url 'blog-list' %}">Blog</a>
-          <a href="">About</a>
+          <a href="{% url 'about-view' %}">About</a>
         </div>
         <div class="nav-right">
           <form method="GET" action="">
@@ -46,7 +46,12 @@
           </form>
           {% if user.is_authenticated %}
           <a href="{% url 'logout-user' %}">Logout</a>
-          <span>Hi, {{ user.username }}</span>
+          <span
+            >Hi,
+            <a href="{% url 'user-profile' user.username %}"
+              >{{ user.username }}</a
+            ></span
+          >
           {% else %}
           <a href="{% url 'login-page' %}">Login</a>
           <a href="{% url 'signup-page' %}">Signup</a>
