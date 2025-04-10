@@ -84,7 +84,7 @@
       Created: {{ blog.created|date:"F j, Y, g:i a" }}
     </div>
     {% if is_own_profile %}
-    <a class="edit-link" href="">Edit</a>
+    <a class="edit-link" href="{% url 'edit-blog' blog.id %}">Edit</a>
     {% endif %}
   </div>
   {% empty %}
@@ -97,7 +97,7 @@
     <div class="blog-date">
       Created: {{ blog.created|date:"F j, Y, g:i a" }}
     </div>
-    <a class="edit-link" href="">Edit</a>
+    <a class="edit-link" href="{% url 'edit-blog' blog.id %}">Edit</a>
   </div>
   {% empty %}
   <p>No drafts available.</p>

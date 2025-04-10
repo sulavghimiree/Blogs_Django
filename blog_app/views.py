@@ -91,7 +91,6 @@ def user_profile(request, username):
         profile_user = request.user
 
     is_own_profile = (profile_user == request.user)
-    print(profile_user)
 
     published = profile_user.blog_set.filter(is_published=True).order_by('-created')
     unpublished = profile_user.blog_set.filter(is_published=False).order_by('-created') if is_own_profile else None
@@ -102,3 +101,19 @@ def user_profile(request, username):
         'unpublished_blogs':unpublished,
         'is_own_profile': is_own_profile
     })
+
+def edit_blog(request, id):
+    blog = get_object_or_404(Blog, id=id)
+
+    if request.user != blog.author:
+        return redirect('home')
+    
+    if request.method == "POST":
+        form = BlogForm(request.POST, instance=blog)
+        if form.is_valid():
+            form.save()
+            return redirect('user-profile', username=request.user.username)
+    else:
+        form = BlogForm(instance=blog)
+    
+    return render(request, 'blog_app/edit_blog.html', {'form': form, 'blog':blog})
