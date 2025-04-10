@@ -22,7 +22,7 @@ Welcome to my personal **Blog App** — a dynamic and fully functional blogging 
 - **Backend**: Django (Python)
 - **Frontend**: HTML5, CSS3, Django Template Engine
 - **Database**: SQLite (default Django DB)
-- **Deployment**: Hosted on `blogs.sulavg.com.np` (can be adapted to any cloud platform)
+- **Deployment**: Hosted on `https://blogs.sulavg.com.np` (can be adapted to any cloud platform)
 
 ---
 
@@ -31,7 +31,7 @@ Welcome to my personal **Blog App** — a dynamic and fully functional blogging 
 To run this project locally:
 
 1. **Clone the repository**  
-   git clone https://github.com/sulavghimire/blog-app.git
+   git clone https://github.com/sulavghimiree/Blogs_Django
    cd blog-app
 
 2. **Create a virtual environment**  
