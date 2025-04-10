@@ -74,8 +74,12 @@ def delete_blog(request, pk):
     return render(request, 'blog_app/delete_blog.html', {'blog':blog})
 
 def blog_list(request):
-    blogs = Blog.objects.filter(is_published=True).order_by('-created')
-    return render(request, 'blog_app/blog_list.html', {'blogs':blogs})
+    query = request.GET.get('q', '')
+    if query:
+        blogs = Blog.objects.filter(title__icontains=query, is_published=True).order_by('-created') | Blog.objects.filter(content__icontains=query, is_published=True).order_by('-created') |  Blog.objects.filter(author__username__icontains=query, is_published=True).order_by('-created') 
+    else:
+        blogs = Blog.objects.filter(is_published=True).order_by('-created')
+    return render(request, 'blog_app/blog_list.html', {'blogs':blogs, 'search_query': query})
 
 def about_view(request):
     return render(request, 'blog_app/about_page.html')
@@ -102,6 +106,7 @@ def user_profile(request, username):
         'is_own_profile': is_own_profile
     })
 
+@login_required(login_url='login-page')
 def edit_blog(request, id):
     blog = get_object_or_404(Blog, id=id)
 

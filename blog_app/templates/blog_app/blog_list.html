@@ -61,9 +61,11 @@
 </style>
 
 <div class="blog-list-container">
+  {% if search_query %}
+  <h1>Search results for: "{{ search_query }}"</h1>
+  {% else %}
   <h1>All Blogs</h1>
-
-  {% for blog in blogs %}
+  {% endif %} {% for blog in blogs %}
   <div class="blog-card">
     <div class="blog-title">
       <a href="{% url 'blog-detail' blog.id %}">{{ blog.title }}</a>

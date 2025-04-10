@@ -40,7 +40,7 @@
           <a href="{% url 'about-view' %}">About</a>
         </div>
         <div class="nav-right">
-          <form method="GET" action="">
+          <form method="GET" action="{% url 'blog-list' %}">
             <input type="text" name="q" placeholder="Search..." />
             <button type="submit">Search</button>
           </form>
