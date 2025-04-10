@@ -14,5 +14,19 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Like(models.Model):
+    blog = models.ForeignKey('Blog', on_delete=models.CASCADE, related_name='likes')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('blog', 'user')
+
+class Comment(models.Model):
+    blog = models.ForeignKey('Blog', on_delete=models.CASCADE, related_name="comments")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
 
 

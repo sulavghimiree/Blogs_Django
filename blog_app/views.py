@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
-from .models import Blog
+from .models import Blog,Comment, Like
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -62,7 +62,24 @@ def create_blog(request):
 
 def blog_detail(request, pk):
     blog = get_object_or_404(Blog, pk=pk, is_published=True)
-    return render(request, 'blog_app/blog_detail.html', {"blog":blog})
+
+    if request.method == "POST":
+        action = request.POST.get("action")
+
+        if action == 'comment':
+            content = request.POST.get("comment")
+            if content:
+                Comment.objects.create(blog=blog, user=request.user, content=content)
+        elif action == "like":
+            Like.objects.get_or_create(blog=blog, user=request.user)
+        elif action == "unlike":
+            Like.objects.filter(blog=blog, user = request.user).delete()
+        
+        return redirect('blog-detail', pk=pk)
+    
+    user_has_liked = blog.likes.filter(user=request.user).exists() if request.user.is_authenticated else False
+
+    return render(request, 'blog_app/blog_detail.html', {"blog":blog, "comments":blog.comments.all().order_by('-created'), "likes": blog.likes.all(), "user_has_liked": user_has_liked})
 
 @login_required(login_url='login-page')
 def delete_blog(request, pk):
