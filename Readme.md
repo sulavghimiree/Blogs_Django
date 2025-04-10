@@ -1,4 +1,4 @@
-# 📝 Sulav's Blog App
+# 📝 MyBlog App
 
 Welcome to my personal **Blog App** — a dynamic and fully functional blogging platform built using **Django** and the **template engine**.
 
