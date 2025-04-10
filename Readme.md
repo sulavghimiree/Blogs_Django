@@ -35,7 +35,7 @@ To run this project locally:
    cd Blogs_Django
 
 2. **Create a virtual environment**  
-   python -m venv venv
+   python -m venv venv  
    source venv/bin/activate # On Windows: venv\Scripts\activate
 
 3. **Install the dependencies**  
