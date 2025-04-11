@@ -10,8 +10,10 @@
   <ul>
     {% for blog in blogs %}
     <li>
-      <a href="{% url 'blog-detail' blog.id %}">{{ blog.title }}</a>
-      <p>{{ blog.short_desc }}</p>
+      <a style="text-decoration: none" href="{% url 'blog-detail' blog.id %}"
+        >{{ blog.title }}
+        <p style="font-size: 17px">{{ blog.short_desc }}</p></a
+      >
       <small>
         <a
           style="font-size: 15px; color: blue; margin-top: 5px"
