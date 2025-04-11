@@ -25,41 +25,249 @@
         color: green;
         background-color: #e6ffe6;
       }
+      /* Hamburger menu styles */
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 5px;
+        z-index: 1001;
+      }
+      .hamburger span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px 0;
+        background-color: #333;
+        transition: all 0.3s;
+      }
+      /* Hamburger animation */
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+
+      /* Mobile search button */
+      .mobile-search-button {
+        background: none;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        padding: 5px;
+        margin-right: 10px;
+      }
+
+      /* Mobile search form */
+      .mobile-search-container {
+        display: none;
+      }
+
+      .mobile-search-form-visible {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 1002;
+        display: none;
+      }
+
+      .mobile-search-form-visible.active {
+        display: flex;
+        justify-content: center;
+      }
+
+      @media screen and (max-width: 768px) {
+        nav {
+          justify-content: space-between;
+          position: relative;
+          padding: 0 15px;
+        }
+        .mobile-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+        }
+        .hamburger {
+          display: block;
+        }
+
+        /* Show mobile search container */
+        .mobile-search-container {
+          display: flex;
+          align-items: center;
+        }
+
+        .nav-center {
+          position: absolute;
+          top: 60px;
+          left: 0;
+          right: 0;
+          background-color: #fff;
+          flex-direction: column;
+          width: 100%;
+          text-align: center;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          z-index: 1000;
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.5s ease-in-out;
+        }
+        .nav-center.active {
+          max-height: 500px; /* Increased to accommodate additional menu items */
+        }
+        .nav-center a,
+        .nav-center .user-info {
+          padding: 15px 0;
+          width: 100%;
+          border-bottom: 1px solid #eee;
+          opacity: 0;
+          transform: translateY(-20px);
+          transition: opacity 0.3s ease, transform 0.3s ease;
+          transition-delay: 0s;
+        }
+        .nav-center.active a,
+        .nav-center.active .user-info {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        /* Staggered animation for menu items */
+        .nav-center.active a:nth-child(1) {
+          transition-delay: 0.1s;
+        }
+        .nav-center.active a:nth-child(2) {
+          transition-delay: 0.2s;
+        }
+        .nav-center.active a:nth-child(3) {
+          transition-delay: 0.3s;
+        }
+        .nav-center.active a:nth-child(4) {
+          transition-delay: 0.4s;
+        }
+        .nav-center.active a:nth-child(5),
+        .nav-center.active .user-info {
+          transition-delay: 0.5s;
+        }
+        .nav-right {
+          display: none;
+        }
+        .mobile-search-form {
+          margin: 15px 0;
+          padding: 0 15px;
+          width: 100%;
+          opacity: 0;
+          transform: translateY(-20px);
+          transition: opacity 0.3s ease, transform 0.3s ease;
+          transition-delay: 0s;
+        }
+        .nav-center.active .mobile-search-form {
+          opacity: 1;
+          transform: translateY(0);
+          transition-delay: 0.6s;
+        }
+        .mobile-search-form input {
+          width: 70%;
+          padding: 8px;
+          border: 1px solid #ddd;
+          border-radius: 4px 0 0 4px;
+        }
+        .mobile-search-form button {
+          padding: 8px 12px;
+          background-color: #4caf50;
+          color: white;
+          border: none;
+          border-radius: 0 4px 4px 0;
+          cursor: pointer;
+        }
+        .user-info {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 15px 0;
+          color: #333;
+        }
+        .user-info a {
+          padding: 5px 0;
+          border-bottom: none;
+        }
+        .divider {
+          height: 1px;
+          width: 80%;
+          background-color: #eee;
+          margin: 10px auto;
+        }
+      }
     </style>
   </head>
   <body>
     <!-- 🌐 Navbar -->
     <header>
       <nav>
-        <div class="nav-left">
-          <a href="{% url 'home' %}">MyBlog</a>
+        <div class="mobile-header">
+          <div class="nav-left">
+            <a href="{% url 'home' %}">MyBlog</a>
+          </div>
+
+          <!-- Mobile search button (outside hamburger) -->
+          <div class="mobile-search-container">
+            <button class="mobile-search-button" id="mobile-search-toggle">
+              🔍︎
+            </button>
+          </div>
+
+          <button class="hamburger" id="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
-        <div class="nav-center">
+
+        <!-- Mobile search form (outside the hamburger menu) -->
+        <form
+          class="mobile-search-form-visible search-form nav-right"
+          id="mobile-search-form"
+          method="GET"
+          action="{% url 'blog-list' %}"
+        >
+          <input type="text" name="q" placeholder="Search..." />
+          <button type="submit">Search</button>
+        </form>
+
+        <div class="nav-center" id="nav-menu">
           <a href="{% url 'home' %}">Home</a>
           <a href="{% url 'blog-list' %}">Blog</a>
           <a href="{% url 'about-view' %}">About</a>
+
+          <!-- Login/Signup or User info -->
+          {% if user.is_authenticated %}
+          <a style="color: blue" href="{% url 'user-profile' user.username %}"
+            >Hi, {{ user.username }}</a
+          >
+          <a style="color: blue" href="{% url 'logout-user' %}">Logout</a>
+          {% else %}
+          <a style="color: blue" href="{% url 'login-page' %}">Login</a>
+          <a style="color: blue" href="{% url 'signup-page' %}">Signup</a>
+          {% endif %}
         </div>
+
+        <!-- Desktop search form -->
         <div class="nav-right">
-          <form method="GET" action="{% url 'blog-list' %}">
+          <form class="search-form" method="GET" action="{% url 'blog-list' %}">
             <input type="text" name="q" placeholder="Search..." />
             <button type="submit">Search</button>
           </form>
-          {% if user.is_authenticated %}
-          <a href="{% url 'logout-user' %}">Logout</a>
-          <span
-            >Hi,
-            <a href="{% url 'user-profile' user.username %}"
-              >{{ user.username }}</a
-            ></span
-          >
-          {% else %}
-          <a href="{% url 'login-page' %}">Login</a>
-          <a href="{% url 'signup-page' %}">Signup</a>
-          {% endif %}
         </div>
       </nav>
     </header>
-
     <!-- 📄 Main Content -->
     <main>{% block content %} {% endblock %}</main>
     <!-- 👣 Footer -->
@@ -74,5 +282,27 @@
         </a>
       </div>
     </footer>
+
+    <!-- JavaScript for hamburger menu and search toggles -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Hamburger menu toggle
+        const hamburger = document.getElementById("hamburger-menu");
+        const navMenu = document.getElementById("nav-menu");
+
+        hamburger.addEventListener("click", function () {
+          hamburger.classList.toggle("active");
+          navMenu.classList.toggle("active");
+        });
+
+        // Mobile search toggle
+        const searchToggle = document.getElementById("mobile-search-toggle");
+        const searchForm = document.getElementById("mobile-search-form");
+
+        searchToggle.addEventListener("click", function () {
+          searchForm.classList.toggle("active");
+        });
+      });
+    </script>
   </body>
 </html>
